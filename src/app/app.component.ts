@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
     this.signUpForm.valueChanges.subscribe(
       (value) => console.log(value)
     );
+    // can .setValue as well but this is essentially writing over the whole form
+    // will need the whole object
+    // but you can use .patchValue to pass in only the key value pairs you want to update
   }
 
   getControls() {
