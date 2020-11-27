@@ -12,9 +12,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      'username': new FormControl(null, Validators.required), // These are kept as strings to avoid changes during minification
-      // We set the validators here - we pass the method references here - much cleaner
-      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'userData': new FormGroup({
+        'username': new FormControl(null, Validators.required), // These are kept as strings to avoid changes during minification
+        // We set the validators here - we pass the method references here - much cleaner
+        'email': new FormControl(null, [Validators.required, Validators.email]),
+      }),
       'gender': new FormControl('female')
     });
   }

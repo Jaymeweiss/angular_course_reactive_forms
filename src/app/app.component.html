@@ -1,35 +1,37 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-<!--      Forces Angular to use our custom form group && we don't need to use a local reference anymore-->
-      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            formControlName="username"
-            class="form-control">
-<!--          We won't automatically have these spans - we need to add this validation text detail and conditionally display using ngIf-->
-          <span *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched"
-                class="help-block">Please enter a valid username!</span>
+      <!--      Forces Angular to use our custom form group && we don't need to use a local reference anymore-->
+      <form (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              class="form-control"
+              formControlName="username"
+              id="username"
+              type="text">
+            <!--          We won't automatically have these spans - we need to add this validation text detail and conditionally display using ngIf-->
+            <span *ngIf="!signUpForm.get('userData.username').valid && signUpForm.get('userData.username').touched"
+                  class="help-block">Please enter a valid username!</span>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              class="form-control"
+              formControlName="email"
+              id="email"
+              type="text">
+          </div>
+          <span *ngIf="!signUpForm.get('userData.email').valid && signUpForm.get('userData.email').touched"
+                class="help-block">Please enter a valid email!</span>
         </div>
-        <div class="form-group">
-          <label for="email">email</label>
-          <input
-            type="text"
-            id="email"
-            formControlName="email"
-            class="form-control">
-        </div>
-        <span *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
-              class="help-block">Please enter a valid email!</span>
-        <div class="radio" *ngFor="let gender of genders">
+        <div *ngFor="let gender of genders" class="radio">
           <label>
             <input
-              type="radio"
+              [value]="gender"
               formControlName="gender"
-              [value]="gender">{{ gender }}
+              type="radio">{{ gender }}
           </label>
         </div>
         <span *ngIf="!signUpForm.valid && signUpForm.touched"
